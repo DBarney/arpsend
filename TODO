@@ -1,0 +1,16 @@
+TODO for arpsend
+
+Port to other platforms; stop ignoring most of what autoconf learns.
+(Although the arpsend build process is autoconf-based, at
+this time arpsend ignores almost everything autoconf discovers
+about your system.  The product was developed on Solaris 7 with gcc 2.95.2,
+and has not been ported to other platforms.  Despite the use of autoconf, the
+code merrily makes assumptions that are only valid on Solaris 7.)
+The use of autoconf here is mostly to provide a framework in case the
+product is ported to other platforms in the future.
+
+If you specify a target IP address of 255.255.255.255, you are warned
+that this is the IP limited broadcast address (correct), but then also
+warned it is an IP experimental (Class E) address (wrong).
+And you are also warned it is on the loopback network (wrong). 
+Fix the warnings.

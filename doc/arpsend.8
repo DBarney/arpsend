@@ -1,0 +1,243 @@
+.\" Copyright (c) 2000-2013, The Trustees of Princeton University.  All rights reserved.
+.\"
+.TH ARPSEND 8 "Nov 6 2013" "Princeton Univ."
+.SH NAME
+arpsend \- send an Ethernet frame containing an IP ARP request or reply packet with user-specified fields
+.SH SYNOPSIS
+arpsend
+[
+.B \-c
+.I count
+]
+[
+.B \-d
+.I debuglevel
+]
+[
+.B \-h
+]
+[
+.B \-p
+.I pause_time
+]
+[
+.B \-q
+]
+[
+.B \-v
+]
+[
+.B \-w
+]
+.br
+        [
+.B \-i
+.I interface_name
+]
+.br
+        [
+.B \-E
+.I ether_source_address
+]
+[
+.B \-e
+.I ether_dest_address
+]
+.br
+        [
+.B \-Q
+.I vlan_id
+]
+.br
+        [
+.B \-o
+.I arp_opcode
+]
+.br
+        [
+.B \-S
+.I sender_hardware_address
+]
+[
+.B \-s
+.I sender_protocol_address
+]
+.br
+        [
+.B \-T
+.I target_hardware_address
+]
+.B \-t
+.I target_protocol_address
+.br
+.SH DESCRIPTION
+arpsend 
+sends an Ethernet frame containing an IP ARP request or reply packet containing fields you specify.
+This is a diagnostic tool intended for use by network administrators.
+.PP
+The program does not listen for any ARP replies; if you want to see
+any ARP replies prompted by a request, you should use another program
+to do so, such as 
+.BR tcpdump (1).
+.SH AVAILABILITY
+.PP
+arpsend
+is a product of the Network Systems Group at
+Princeton University's Office of 
+Information Technology,
+and is available from
+http://www.net.princeton.edu/software/arpsend/
+.PP
+Presently the product builds and runs on Solaris 9 and 10 on SPARC with gcc.
+.PP
+The program relies on the
+.BR libnet (3)
+library.
+.SH OPTIONS
+.TP
+.BI \-c \ count
+Specifies the number of packets to send.
+If not specified, this defaults to 1.
+.TP
+.BI \-d \ debug_level
+Sets the
+.I debug_level
+variable that controls the amount of debugging messages generated.
+If not specified, this defaults to 0 (no debugging).
+Presently no debugging messages are defined.
+.TP
+.BI \-E \ ether_source_address
+Specifies the source address of the Ethernet frame.
+If not specified, this defaults to the Ethernet address of the outgoing interface.
+(Some environments may not allow you to override this value.)
+.TP
+.BI \-e \ ether_dest_address
+Specifies the destination address of the Ethernet frame.
+If not specified, this defaults to the Ethernet broadcast address.
+.TP
+.B \-h
+Display a brief usage summary, then exit.
+.TP
+.BI \-i \ interface_name
+Specifes the name of the Ethernet interface through which the packet should be sent.
+If not specified, this defaults to the first interface that is up (other than loopback).
+.TP
+.BI \-o \ arp_opcode
+Specifies the ARP opcode; valid values are 1 (ARP Request) and 2 (ARP Reply).
+If not specified, this defaults to 1 (ARP Request).
+.TP
+.BI \-p \ pause_time
+Specifies the number of seconds to pause between sending each packet,
+when the packet count is great than 1.
+If not specified, this defaults to 1 second.
+.TP
+.B \-q
+Specifies 'quiet' operation; only errors and warnings are displayed.
+.TP
+.BI \-Q \ vlan_id
+Tag the frame with an 802.1Q VLAN ID.
+.TP
+.BI \-S \ sender_hardware_address
+Specifies the ARP 
+.IR "sender hardware address" .
+If not specified, this defaults to the Ethernet address of the outgoing interface.
+.TP
+.BI \-s \ sender_protocol_address
+Specifies the ARP 
+.IR "sender protocol address" .
+If not specified, this defaults to the primary IP address of the outgoing interface.
+.TP
+.BI \-T \ target_hardware_address
+Specifies the ARP 
+.IR "target hardware address" .
+If not specified, this default to 0:0:0:0:0:0. 
+.TP
+.BI \-t \ target_protocol_address
+Specifies the ARP 
+.IR "target protocol address" .
+This option must be specified; no default value is supplied.
+.TP
+.B \-v
+Display the program's version number, then exit.
+.TP
+.B \-w
+Specifies that 
+arpsend
+should not warn you about values that might cause network problems.
+.SH OPERATION
+arpsend 
+is a diagnostic tool intended to be used by an network administrator.
+It is possible to specify values that will interfere with the normal
+operation of devices attached to the network, or the network as a whole.
+.PP
+arpsend
+checks for the most-common values that could cause network problems,
+but by no means can catch all such combinations of values.
+When it believes the values you specify could cause a problem, it
+will display a warning, and ask you if you still wish to send the packet.
+You can skip these checks (and the associated prompt) with the 
+.B \-w 
+option; your packet will be sent without comment.
+.SH EXAMPLES
+.LP
+To broadcast an ARP Request out the first interface that is up, requesting that 192.168.1.1 respond
+with an ARP Reply:
+.RS
+.nf
+\fBarpsend -t 192.168.1.1\fP
+.fi
+.RE
+.LP
+In the example above, if my own IP address (on this interface) were 192.168.1.1,
+the packet would be a Gratuitous ARP request.
+Although the value of the
+.I "target hardware address"
+is not significant in a Gratuitous ARP request,
+typical ARP implementations set it to
+ff:ff:ff:ff:ff:ff
+when they send a Gratuitous ARP request; you can duplicate this behavior with:
+.RS
+.nf
+\fBarpsend -T ff:ff:ff:ff:fff:ff -t 192.168.1.1\fP
+.fi
+.RE
+.LP
+To unicast an ARP Request via interface le1 to 0:0:1:1:2:3, requesting that 192.168.1.1 respond
+with an ARP Reply:
+.RS
+.nf
+\fBarpsend -i le1 -e 0:0:1:1:2:3 -t 192.168.1.1\fP
+.fi
+.RE
+.LP
+To send an ARP Reply that appears to come from
+a device with IP address 192.168.1.3 and Ethernet address 0:0:1:1:1:1,
+unicasting the packet to 0:0:1:9:9:9 (we'll pretend that the target
+device's IP address is 192.168.1.4):
+.RS
+.nf
+\fBarpsend -o 2 -E 0:0:1:1:1:1 -e 0:0:1:9:9:9 -S 0:0:1:1:1:1 -s 192.168.1.3 -T 0:0:1:9:9:9 -t 192.168.1.4\fP
+.fi
+.RE
+.SH AUTHOR
+The program was written by Irwin Tillman
+of Princeton University's OIT Network Systems Group.
+It was written to run on Solaris 9 and 10,
+relying on the generally-available
+.BR libnet (3)
+library.
+.SH BUGS
+Does not support FDDI interfaces.
+.SH SEE ALSO
+.TP 10
+RFC 826
+.I "Address Resolution Protocol"
+.TP 10
+RFC 1122
+.I "Host Network Requirements"
+(Link Layer: Specific Issues, section 2.3)
+.TP 10
+.BR libnet (3)
+(a.k.a libwrite, a packet writing library),
+available from
+http://www.packetfactory.net/libnet

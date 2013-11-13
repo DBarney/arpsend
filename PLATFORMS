@@ -1,0 +1,36 @@
+Platform-Specific Notes for arpsend
+
+The author develops this program on Solaris 9 on SPARC, so that's the platform
+you can expect to work.    The author has not ported the program to other platforms,
+and in fact, it currently ignores much of what 'configure' discovers.
+
+Others have contributed patches to make this program run on several other platforms.
+The author is usually unable to test whether these patches work on those platforms.
+
+
+
+SOLARIS
+
+The current version of the program has been successfully built and used on the
+following versions of Solaris:
+
+        Solaris 9 on SPARC
+        gcc 3.3.3
+        libnet 1.1.2.1
+
+        Solaris 9 on SPARC
+        gcc 3.3.6
+        libnet 1.1.2.1
+
+        Solaris 10 on SPARC
+        gcc 4.2.2
+        libnet 1.1.2.1
+
+        Solaris 10 on SPARC
+        gcc 4.2.4
+        libnet 1.1.2.1
+
+Earlier versions of the program has been successfully built and used on on the
+following versions of Solaris; it is possible that the current version may still
+build and run on them, but this has not been verified by the author:
+

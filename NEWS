@@ -1,0 +1,66 @@
+arpsend NEWS - User visible changes.
+See the file ChangeLog for the details of all changes.
+
+Version 1.2.3 - November 6 2013, by Irwin Tillman
+
+* No user-visible changes.
+
+
+Version 1.2.2 - October 23 2008, by Irwin Tillman
+
+* No user-visible changes.
+
+
+Version 1.2.1 - February 28 2008, by Irwin Tillman
+
+* Add support for Solaris 10.
+
+
+Version 1.2.0 - March 14 2007, by Irwin Tillman
+
+* Upgraded autoconf and automake, may build on newer systems.
+
+* Allow you to add 802.1Q VLAN ID to outgoing frames.
+
+* You may now specify 0 seconds as a valid pause time.
+
+
+Version 1.1.0 - October 27 2004, by Irwin Tillman
+
+* Upgraded from the libnet 1.0.x API to the libnet 1.1.x API.
+  We no longer support the libnet 1.1.x API.  To compile this
+  version, you must first upgrade libnet to 1.1.x.
+
+
+Version 1.0.5 - August 24 2004, by Irwin Tillman
+
+* Upgraded autoconf and automake, may build on newer systems.
+
+
+Version 1.0.4 - August 24 2004, by Irwin Tillman
+
+* No user-visible changes.
+
+
+Version 1.0.3 - May 2002, by Irwin Tillman
+
+* We should be able to compile under gcc 3.0.x now.
+
+* The default sender protocol address on little-endian machines
+  is no longer wrong.
+
+ 
+Version 1.0.2 - February 2001, by Irwin Tillman
+
+* No user-visible changes.
+
+
+Version 1.0.1 - January 2001, by Irwin Tillman
+
+* Cleanup of some of the configuration code.  You may now specify
+  where libnet libraries and includes are located.
+
+
+Version 1.0.0 - December 1 2000, by Irwin Tillman
+
+* Original version

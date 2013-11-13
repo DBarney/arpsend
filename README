@@ -1,0 +1,46 @@
+README for arpsend
+
+This is arpsend.
+
+This utility is intended to be used by a network administrator for
+diagnostic purposes.  Because it allows you to construct packets which
+could interfere with the normal operation of devices on the network,
+care must be taken in how this software is used.
+
+This software was created by the Network Systems Group at Princeton University's
+Office of Information Technology, networking at princeton dot edu.
+It was written by Irwin Tillman.
+
+It is available from: http://www.net.princeton.edu/software/arpsend/
+
+This version runs on Solaris 9 and 10 on SPARC, compiled with gcc. 
+It has not been ported to any other platform at this time.
+This version supports only Ethernet interfaces, not FDDI.
+
+It was intended for our use at Princeton University, so was written
+to operate on the platform(s) we use, with the features we need.  
+As others have asked for the software, we've made it generally available, 
+however, we do not have the resources available to port it to additional 
+platforms or add features.
+
+See the file INSTALL.arpsend for installation instructions.
+Generic building and installation instructions are in INSTALL.
+
+The file NEWS describes recent user-visible changes to the product.
+
+The product is free, however, it includes code that was published in
+other programs; those parts are subject to copyright and certain restrictions.
+See the file COPYING for specifics.
+
+This software is provided "as is" and any express or implied
+warranties, including, but not limited to, the implied warranties of
+mechantability and fitness for a particular purpose are disclaimed.  In
+no event shall the authors or Princeton University be liable for any
+direct, indirect, incidental, special exemplary, or consequential
+damages (including, but not limited to, procurement of substitute goods
+or services; loss of use, data, or profits; or business interruption)
+however caused and on any theory of liability, whether in contract,
+strict liability, or tort (including negligence or otherwise) arising
+in any way out of the use of this software, even if advised of the
+possibility of such damage.
+
